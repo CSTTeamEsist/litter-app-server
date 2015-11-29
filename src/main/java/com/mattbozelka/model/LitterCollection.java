@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LitterCollection {
 	
 	private long eventID;
+	private String litterName;
+	private String litterIcon;
 	private long litterID;
 	private long volID;
 	private long teamID;
@@ -15,14 +17,19 @@ public class LitterCollection {
 	public LitterCollection(){
 		this.eventID = -1;
         this.litterID = -1;
+        this.setLitterName("");
+        this.setLitterIcon("");
         this.volID = -1;
         this.teamID = -1;
         this.tally = -1;
 	}
 	
-	public LitterCollection(long eventID, long litterID, long volID, long teamID, long tally){
+	public LitterCollection(long eventID, long litterID, String litterName,
+			String litterIcon, long volID, long teamID, long tally){
 		this.eventID = eventID;
         this.litterID = litterID;
+		this.setLitterName(litterName);
+		this.setLitterIcon(litterIcon);
         this.volID = volID;
         this.teamID = teamID;
         this.tally = tally;
@@ -66,5 +73,21 @@ public class LitterCollection {
 
 	public void setTally(long tally) {
 		this.tally = tally;
+	}
+
+	public String getLitterName() {
+		return litterName;
+	}
+
+	public void setLitterName(String litterName) {
+		this.litterName = litterName;
+	}
+
+	public String getLitterIcon() {
+		return litterIcon;
+	}
+
+	public void setLitterIcon(String litterIcon) {
+		this.litterIcon = litterIcon;
 	}
 }
