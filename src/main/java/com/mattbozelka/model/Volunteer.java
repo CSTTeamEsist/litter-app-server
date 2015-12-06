@@ -31,10 +31,6 @@ public class Volunteer {
 		return volID;
 	}
 
-	public void setVolID(long volID) {
-		this.volID = volID;
-	}
-
 	public String getFName() {
 		return fName;
 	}

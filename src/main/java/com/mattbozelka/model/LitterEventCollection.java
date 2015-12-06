@@ -32,32 +32,16 @@ public class LitterEventCollection {
 		return eventID;
 	}
 
-	public void setEventID(long eventID) {
-		this.eventID = eventID;
-	}
-
 	public long getLitterID() {
 		return litterID;
 	}
 
-	public void setLitterID(long litterID) {
-		this.litterID = litterID;
-	}
-	
 	public long getVolID() {
 		return volID;
 	}
 
-	public void setVolID(long volID) {
-		this.volID = volID;
-	}
-
 	public long getTeamID() {
 		return teamID;
-	}
-
-	public void setTeamID(long teamID) {
-		this.teamID = teamID;
 	}
 
 	public long getTally() {

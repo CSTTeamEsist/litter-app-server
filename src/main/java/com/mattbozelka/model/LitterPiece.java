@@ -27,10 +27,6 @@ public class LitterPiece {
 	public Long getLitterID() {
 		return litterID;
 	}
-
-	public void setLitterID(long litterID) {
-		this.litterID = litterID;
-	}
 	
 	public String getName() {
 		return name;

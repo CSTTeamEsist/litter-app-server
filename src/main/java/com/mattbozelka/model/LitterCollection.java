@@ -39,10 +39,6 @@ public class LitterCollection {
 		return eventID;
 	}
 
-	public void setEventID(long eventID) {
-		this.eventID = eventID;
-	}
-
 	public long getLitterID() {
 		return litterID;
 	}

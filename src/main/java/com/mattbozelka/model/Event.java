@@ -29,10 +29,6 @@ public class Event {
 		return eventID;
 	}
 
-	public void setEventID(long eventID) {
-		this.eventID = eventID;
-	}
-
 	public String getLocation() {
 		return location;
 	}
