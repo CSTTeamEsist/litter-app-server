@@ -13,7 +13,6 @@ public class VolunteerListStub implements VolunteerListRepository {
 		volunteerList = new ArrayList<Volunteer>();
 	}
 	
-
 	private void buildVolunteerList(){
 		
 		DatabaseConnection dbcon = new DatabaseConnection();
@@ -31,20 +30,35 @@ public class VolunteerListStub implements VolunteerListRepository {
 			volunteerList.add(v);
 		
 		}
+
+		//dbcon.closeConnection();
+	}
+
+	@Override
+	public List<Volunteer>  addVolunteer(String fName, String lName, String email, String password){
+
+		DatabaseConnection dbcon = new DatabaseConnection();
+		String sql = "INSERT INTO VOLUNTEER (`F_NAME`, `L_NAME`, `EMAIL_ADDRESS`, `PASSWORD`) " +
+		"VALUES ('" + fName + "', '" + lName + "', '" + email + "', '" + password + "');";
+		
+		if (dbcon.updateTable(sql)){
+			//System.out.println("update");
+		} else {
+			//System.out.println("no update");
+		}
+		
+		buildVolunteerList();
+		//dbcon.closeConnection();
+		return volunteerList;
+		
 	}
 	
 	@Override
 	public List<Volunteer> getVolunteerList(){
-		/*
-		Volunteer v1 = new Volunteer (123, "Joe", "Bruin", "jbruin@gmail.com", "stuffing");
-		Volunteer v2 = new Volunteer (324, "Tommy", "Trojan", "ttrojan@gmail.com", "turkey");
-		Volunteer v3 = new Volunteer (756, "Monte", "Rey", "mrey@gmail.com", "mashed potatoes");
 		
-		volunteerList.add(v1);
-		volunteerList.add(v2);
-		volunteerList.add(v3);*/
 		buildVolunteerList();
 		return volunteerList;
 	}
+	
 	
 }

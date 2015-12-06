@@ -59,6 +59,31 @@ public class DatabaseConnection {
 	        }
 	}
 	
+	public boolean updateTable(String query){
+
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+		    stmt.executeUpdate(query);
+		    return true;
+		} catch (Exception ex) {
+			return false;
+		} finally {
+		    // it is a good idea to release
+		    // resources in a finally{} block
+		    // in reverse-order of their creation
+		    // if they are no-longer needed
+
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        stmt = null;
+		    }
+		}
+	}
+	
 	public ArrayList<String[]> getQueryResults(String query) {
 
 		Statement stmt = null;
@@ -152,6 +177,14 @@ public class DatabaseConnection {
 	 }
 	 private boolean databaseIsConnected(){
 		 return databaseConnected;
+	 }
+	 public void closeConnection(){
+		 try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
 	 }
 	
 }
