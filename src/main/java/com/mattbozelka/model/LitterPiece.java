@@ -5,20 +5,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LitterPiece {
 	
+	private long litterID;
 	private String name;
 	private long count;
 	private String iconName;
 	
 	public LitterPiece(){
+		this.litterID = 0;
 		this.name = null;
         this.count = 0;
         this.iconName = null;
 	}
 	
-	public LitterPiece(String name, long count, String iconName) {
+	public LitterPiece(long litterID, String name, String iconName, long count) {
+		this.litterID = litterID;
 		this.name = name;
 		this.count = count;
 		this.iconName = iconName;
+	}
+
+	public Long getLitterID() {
+		return litterID;
+	}
+
+	public void setLitterID(long litterID) {
+		this.litterID = litterID;
 	}
 	
 	public String getName() {

@@ -14,7 +14,9 @@ import com.mattbozelka.repository.LoginStub;
 /**
  * Root resource (exposed at "login/test@email.com/myPass123" path)
  */
-@Path("login/test@email.com/myPass123")
+//@Path("login/test@email.com/myPass123")
+
+@Path("login")
 public class LoginResource {
 	
    LoginRepository userList = new LoginStub();

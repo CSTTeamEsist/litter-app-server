@@ -24,4 +24,5 @@ public class LitterCollectionResource {
     public List<LitterCollection> getIt() {
         return litterCollectionList.getLitterCollectionList();
     }
+    
 }

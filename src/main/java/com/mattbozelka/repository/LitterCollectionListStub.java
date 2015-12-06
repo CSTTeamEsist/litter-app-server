@@ -12,18 +12,37 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 	public LitterCollectionListStub() {
 		litterCollectionList = new ArrayList<LitterCollection>();
 	}
-	
+
+	private void buildLitterCollectionList(){
+		
+		String sql = "SELECT LITTER_COLLECTION.EVENT_ID, LITTER_COLLECTION.LITTER_ID, LITTER.NAME, LITTER.PICTURE_URL, " +
+		"LITTER_COLLECTION.VOL_ID, LITTER_COLLECTION.TEAM_ID, LITTER_COLLECTION.TALLY " + 
+		"FROM LITTER, LITTER_COLLECTION WHERE LITTER_COLLECTION.VOL_ID=1 AND LITTER_COLLECTION.LITTER_ID=LITTER.LITTER_ID;";
+			
+		DatabaseConnection dbcon = new DatabaseConnection();
+		ArrayList<String[]> queryResults = dbcon.getQueryResults(sql);
+		for (String[] row : queryResults){
+			
+			Long eventID = dbcon.handleLongNulls(row[0]);
+			Long litterID = dbcon.handleLongNulls(row[1]);
+			String litterName = dbcon.handleStrNulls(row[2]);
+			String litterIcon = dbcon.handleStrNulls(row[3]);
+			Long volID = dbcon.handleLongNulls(row[4]);
+			Long teamID = dbcon.handleLongNulls(row[5]);
+			Long tally = dbcon.handleLongNulls(row[6]);
+			
+			LitterCollection lc = 
+					new LitterCollection (eventID, litterID, litterName, litterIcon, volID, teamID, tally);
+			
+			litterCollectionList.add(lc);
+		
+		}
+	}
 	
 	@Override
 	public List<LitterCollection> getLitterCollectionList(){
-		LitterCollection lc1 = new LitterCollection (111, 222, "Name222", "Icon222", 333, 444, 7);
-		LitterCollection lc2 = new LitterCollection (222, 333, "Name333", "Icon333", 444, 555, 3);
-		LitterCollection lc3 = new LitterCollection (333, 444, "Name444", "Icon444", 555, 666, 4);
 		
-		litterCollectionList.add(lc1);
-		litterCollectionList.add(lc2);
-		litterCollectionList.add(lc3);
-		
+		buildLitterCollectionList();
 		return litterCollectionList;
 	}
 	
