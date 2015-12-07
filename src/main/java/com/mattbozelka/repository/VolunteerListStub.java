@@ -33,10 +33,34 @@ public class VolunteerListStub implements VolunteerListRepository {
 
 		//dbcon.closeConnection();
 	}
-
+	
 	@Override
-	public List<Volunteer>  addVolunteer(String fName, String lName, String email, String password){
+	public Volunteer getVolunteer(String fName, String lName, String email){
+		Volunteer v = new Volunteer();
+		DatabaseConnection dbcon = new DatabaseConnection();
+		ArrayList<String[]> queryResults = 
+				dbcon.getQueryResults("Select * From VOLUNTEER WHERE " + 
+				"F_NAME='" + fName + "' AND L_NAME='" + lName + "' AND EMAIL_ADDRESS='" + email + "'");
+		for (String[] row : queryResults){
 
+			Long volID = dbcon.handleLongNulls(row[0]);
+			String fname = dbcon.handleStrNulls(row[1]);
+			String lname = dbcon.handleStrNulls(row[2]);
+			String emailAddress = dbcon.handleStrNulls(row[3]);
+			String password = dbcon.handleStrNulls(row[4]);
+			
+			v = new Volunteer (volID, fname, lname, emailAddress, password);
+			
+		
+		}
+		
+		return v;
+		//dbcon.closeConnection();
+	}
+	
+	@Override
+	public Volunteer addVolunteer(String fName, String lName, String email, String password){
+		
 		DatabaseConnection dbcon = new DatabaseConnection();
 		String sql = "INSERT INTO VOLUNTEER (`F_NAME`, `L_NAME`, `EMAIL_ADDRESS`, `PASSWORD`) " +
 		"VALUES ('" + fName + "', '" + lName + "', '" + email + "', '" + password + "');";
@@ -47,9 +71,11 @@ public class VolunteerListStub implements VolunteerListRepository {
 			//System.out.println("no update");
 		}
 		
-		buildVolunteerList();
+		//buildVolunteerList();
 		//dbcon.closeConnection();
-		return volunteerList;
+		Volunteer v = getVolunteer(fName, lName, email);
+		
+		return v;
 		
 	}
 	

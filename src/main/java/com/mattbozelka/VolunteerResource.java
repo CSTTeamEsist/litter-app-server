@@ -36,16 +36,15 @@ public class VolunteerResource {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Volunteer> getIt() {
-    	System.out.println("GET");
         return volunteerList.getVolunteerList();
     }
 
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Volunteer> testIt() {
+    public Volunteer testIt() {
     	System.out.println("TEST");
-    	
+    	Volunteer v = new Volunteer();
 		try {
 			//TODO: To test this, change the values below
 			String json = "{\"FName\":\"Joey\",\"LName\":\"Blowy\",\"emailAddress\":\"12zzzz@email.com\",\"password\":\"test1234\"}";
@@ -54,7 +53,7 @@ public class VolunteerResource {
 			jsonReader.close();
 			
 			System.out.println(jsonObject);
- 
+			
 			try {
 				URL url = new URL("http://localhost:8080/litter-service-webapp/webapi/volunteer-list/create/");
 				URLConnection connection = url.openConnection();
@@ -72,6 +71,11 @@ public class VolunteerResource {
 				}
 				System.out.println("\nREST Service Invoked Successfully..");
 				in.close();
+				
+		    	v = volunteerList.getVolunteer(jsonObject.getString("FName"), 
+		    			jsonObject.getString("LName"), jsonObject.getString("emailAddress"));
+				
+				
 			} catch (Exception e) {
 				System.out.println("\nError while calling REST Service");
 				System.out.println(e);
@@ -80,15 +84,16 @@ public class VolunteerResource {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	
-        return volunteerList.getVolunteerList();
+
+		return v;
+        //return volunteerList.getVolunteerList();
     }
    
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Volunteer>  postIt(InputStream incomingData) {
+    public Volunteer postIt(InputStream incomingData) {
     	
 		StringBuilder jsonBuilder = new StringBuilder();
 		try {
@@ -105,11 +110,10 @@ public class VolunteerResource {
 		JsonObject jsonObject = jsonReader.readObject();
 		jsonReader.close();
 
-    	volunteerList.addVolunteer(jsonObject.getString("FName"), 
+    	return volunteerList.addVolunteer(jsonObject.getString("FName"), 
     			jsonObject.getString("LName"), jsonObject.getString("emailAddress"), 
     			jsonObject.getString("password"));
-    	//System.out.println("end");
-        return volunteerList.getVolunteerList();
+    	
 	}
     
     
