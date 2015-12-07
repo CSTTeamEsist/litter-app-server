@@ -59,6 +59,45 @@ public class DatabaseConnection {
 	        }
 	}
 	
+
+	public boolean recordExists(String query){
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+		    rs=stmt.executeQuery(query);
+		    if (!rs.next()) {
+		    	return false;
+		    }
+		    return true;
+		} catch (Exception ex) {
+			//System.out.println(ex.getMessage());
+			return false;
+		} finally {
+		    // it is a good idea to release
+		    // resources in a finally{} block
+		    // in reverse-order of their creation
+		    // if they are no-longer needed
+
+		    if (rs != null) {
+		        try {
+		            rs.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        rs = null;
+		    }
+		    
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        stmt = null;
+		    }
+		}
+	}
+	
 	public boolean updateTable(String query){
 
 		Statement stmt = null;
