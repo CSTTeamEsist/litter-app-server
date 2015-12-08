@@ -1,5 +1,6 @@
 package com.mattbozelka.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -24,6 +25,7 @@ public class LitterPiece {
 		this.iconName = iconName;
 	}
 
+	@XmlElement
 	public Long getLitterID() {
 		return litterID;
 	}

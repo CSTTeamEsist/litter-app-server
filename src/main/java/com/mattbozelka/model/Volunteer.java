@@ -1,5 +1,6 @@
 package com.mattbozelka.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -27,6 +28,7 @@ public class Volunteer {
 		this.password = password;
 	}
 	
+	@XmlElement
 	public long getVolID() {
 		return volID;
 	}

@@ -25,7 +25,7 @@ public class EventListStub implements EventListRepository {
 			Long orgID = dbcon.handleLongNulls(row[3]);
 			
 			Event ev = new Event (eventID, location, eventDate, orgID);
-			
+
 			eventList.add(ev);
 		
 		}
@@ -35,6 +35,7 @@ public class EventListStub implements EventListRepository {
 	public List<Event> getEventList(){
 		
 		buildEventList();
+		
 		return eventList;
 	}
 	

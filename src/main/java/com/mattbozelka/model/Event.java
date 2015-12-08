@@ -1,5 +1,6 @@
 package com.mattbozelka.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -9,7 +10,6 @@ public class Event {
 	private String location;
 	private String eventDate;
 	private long orgID;
-	
 	
 	public Event(){
 		this.eventID = -1;
@@ -25,6 +25,7 @@ public class Event {
 		this.orgID = orgID;
 	}
 	
+	@XmlElement
 	public long getEventID() {
 		return eventID;
 	}
@@ -44,13 +45,10 @@ public class Event {
 	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
 	}
-
+	
+	@XmlElement
 	public long getOrgID() {
 		return orgID;
 	}
 		
-	public void orgID(long orgID) {
-		this.orgID = orgID;
-		
-	}
 }
