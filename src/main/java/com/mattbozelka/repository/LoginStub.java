@@ -27,11 +27,26 @@ public class LoginStub implements LoginRepository {
 		
 		}
 	}
+
+	private User getUser(String email, String password){
+		
+		DatabaseConnection dbcon = new DatabaseConnection();
+		String[] userRec = 
+				dbcon.getRecord("Select Vol_ID From VOLUNTEER Where EMAIL_ADDRESS='" 
+		        + email + "' AND PASSWORD='" + password + "'");
+		
+		User user = new User(dbcon.handleStrNulls(userRec[0]));
+		return user;
+	}
 	
 	@Override
 	public List<User> getUserList(){
-		
 		buildUserList();
 		return userList;
+	}
+	
+	@Override
+	public User getUserID(String email, String password){
+		return getUser(email,password);
 	}
 }

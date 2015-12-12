@@ -12,7 +12,6 @@ public class LitterEventCollection {
 	private long teamID;
 	private long tally;
 	
-	
 	public LitterEventCollection(){
 		this.eventID = -1;
         this.litterID = -1;

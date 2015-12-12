@@ -123,6 +123,74 @@ public class DatabaseConnection {
 		}
 	}
 	
+
+	public String[] getRecord(String query) {
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		String[] rows = {};
+		try {
+
+		    stmt = conn.createStatement();
+		    String sql = query; 
+		    rs = stmt.executeQuery(sql);
+		    
+		    ResultSetMetaData metadata = rs.getMetaData();
+		    int numberOfColumns = metadata.getColumnCount();
+		    rows = new String[numberOfColumns]; 
+		    //TODO: add validation of only 1 record returned
+		    while (rs.next()) {              
+		        int i = 1;
+		        while(i <= numberOfColumns) {
+		        	rows[i-1] = rs.getString(i);
+		        	
+			        //TODO: delete after testing
+			        //System.out.print(rs.getString(i) + " | ");
+		        	
+			        i++;
+		        	
+		        }
+		        
+		        //TODO: delete after testing
+		        //System.out.println();
+		    }
+		    
+		    return rows;
+		} catch (Exception ex) {
+            // handle the error
+			
+			//System.out.println(ex.toString());
+			
+			return rows;
+        } finally {
+		    // it is a good idea to release
+		    // resources in a finally{} block
+		    // in reverse-order of their creation
+		    // if they are no-longer needed
+
+		    if (rs != null) {
+		        try {
+		            rs.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        rs = null;
+		    }
+
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        stmt = null;
+		    }
+		}
+		    
+	}
+	
+	
+	
+	
+	
 	public ArrayList<String[]> getQueryResults(String query) {
 
 		Statement stmt = null;
