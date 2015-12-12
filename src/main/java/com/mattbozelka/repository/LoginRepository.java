@@ -7,6 +7,5 @@ import com.mattbozelka.model.User;
 public interface LoginRepository {
 
 	List<User> getUserList();
-
 	User getUserID(String email, String password);
 }

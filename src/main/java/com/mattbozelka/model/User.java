@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class User {
 	
+	//user object to store user id's 
+	
 	private String userID;
 	
 	public User(){

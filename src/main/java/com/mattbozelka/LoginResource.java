@@ -21,7 +21,8 @@ import com.mattbozelka.repository.LoginStub;
 public class LoginResource {
 	
    LoginRepository userList = new LoginStub();
-	
+   
+   //returns a list of user ids
    @GET
    @Path("/")
    @Produces(MediaType.APPLICATION_JSON)
@@ -29,7 +30,9 @@ public class LoginResource {
        return userList.getUserList();
    }
    
-
+   //returns a userid if user exists in database
+   //or empty if not
+   //validated by email address and password
    @GET
    @Path("/{email}/{password}/")
    @Produces(MediaType.APPLICATION_JSON)
