@@ -1,9 +1,12 @@
 package com.mattbozelka.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class User {
+	
+	//user object to store user id's 
 	
 	private String userID;
 	

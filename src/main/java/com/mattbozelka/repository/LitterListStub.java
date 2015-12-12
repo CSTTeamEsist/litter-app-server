@@ -14,17 +14,28 @@ public class LitterListStub implements LitterListRepository {
 		litterList = new ArrayList<LitterPiece>();
 	}
 	
+
+	private void buildLitterList(){
+		
+		DatabaseConnection dbcon = new DatabaseConnection();
+		ArrayList<String[]> queryResults = dbcon.getQueryResults("Select * From LITTER");
+		for (String[] row : queryResults){
+			
+			Long litterID = dbcon.handleLongNulls(row[0]);
+			String litterName = dbcon.handleStrNulls(row[1]);
+			String litterIcon = dbcon.handleStrNulls(row[2]);
+			
+			//TODO: LitterPiece.count is set to zero until determining its purpose
+			LitterPiece lp = new LitterPiece (litterID, litterName, litterIcon, 0);
+			
+			litterList.add(lp);
+		
+		}
+	}
 	
 	@Override
 	public List<LitterPiece> getLitterList(){
-		
-		LitterPiece l1 = new LitterPiece("Plastic", 0, "icon1");
-		LitterPiece l2 = new LitterPiece("Rubber", 0, "icon2");
-		LitterPiece l3 = new LitterPiece("Metal", 0, "icon3");
-		
-		litterList.add(l1);
-		litterList.add(l2);
-		litterList.add(l3);
+		buildLitterList();
 		
 		return litterList;
 	}

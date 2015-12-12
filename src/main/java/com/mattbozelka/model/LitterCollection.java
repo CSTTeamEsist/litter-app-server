@@ -1,5 +1,6 @@
 package com.mattbozelka.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -35,38 +36,26 @@ public class LitterCollection {
         this.tally = tally;
 	}
 	
+	@XmlElement
 	public long getEventID() {
 		return eventID;
 	}
-
-	public void setEventID(long eventID) {
-		this.eventID = eventID;
-	}
-
+	
+	@XmlElement
 	public long getLitterID() {
 		return litterID;
 	}
-
-	public void setLitterID(long litterID) {
-		this.litterID = litterID;
-	}
 	
+	@XmlElement
 	public long getVolID() {
 		return volID;
 	}
-
-	public void setVolID(long volID) {
-		this.volID = volID;
-	}
-
+	
+	@XmlElement
 	public long getTeamID() {
 		return teamID;
 	}
-
-	public void setTeamID(long teamID) {
-		this.teamID = teamID;
-	}
-
+	
 	public long getTally() {
 		return tally;
 	}

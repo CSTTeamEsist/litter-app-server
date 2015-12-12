@@ -12,18 +12,29 @@ public class EventListStub implements EventListRepository {
 	public EventListStub() {
 		eventList = new ArrayList<Event>();
 	}
-	
+
+	private void buildEventList(){
+		
+		DatabaseConnection dbcon = new DatabaseConnection();
+		ArrayList<String[]> queryResults = dbcon.getQueryResults("Select * From EVENT");
+		for (String[] row : queryResults){
+			
+			Long eventID = dbcon.handleLongNulls(row[0]);
+			String location = dbcon.handleStrNulls(row[1]);
+			String eventDate = dbcon.handleStrNulls(row[2]);
+			Long orgID = dbcon.handleLongNulls(row[3]);
+			
+			Event ev = new Event (eventID, location, eventDate, orgID);
+
+			eventList.add(ev);
+		
+		}
+	}
 	
 	@Override
 	public List<Event> getEventList(){
 		
-		Event e1 = new Event (111, "Santa Monica", "December 3, 2015", 10);
-		Event e2 = new Event (112, "Venice Beach", "November 20, 2015", 23);
-		Event e3 = new Event (213, "Salton Sea", "January 4, 2016", 13);
-		
-		eventList.add(e1);
-		eventList.add(e2);
-		eventList.add(e3);
+		buildEventList();
 		
 		return eventList;
 	}
