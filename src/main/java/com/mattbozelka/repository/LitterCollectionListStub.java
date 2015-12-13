@@ -50,6 +50,35 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 		
 		}
 	}
+	
+	private void buildUncollectedLitterList(String userId,String eventId){
+		
+		String sql=
+		"SELECT t1.* " +
+		"FROM LITTER t1 " +
+		"LEFT JOIN LITTER_COLLECTION t2 ON  " +
+		"t2.LITTER_ID = t1.LITTER_ID AND t2.VOL_ID='" + userId + "' AND t2.EVENT_ID='" + eventId + "' " +
+		"WHERE t2.LITTER_ID IS NULL ";
+		
+		DatabaseConnection dbcon = new DatabaseConnection();
+		ArrayList<String[]> queryResults = dbcon.getQueryResults(sql);
+		for (String[] row : queryResults){
+			
+			Long eventID = dbcon.handleLongNulls(eventId);
+			Long litterID = dbcon.handleLongNulls(row[0]);
+			String litterName = dbcon.handleStrNulls(row[1]);
+			String litterIcon = dbcon.handleStrNulls(row[2]);
+			Long volID = dbcon.handleLongNulls(userId);
+			Long teamID = dbcon.handleLongNulls("1");
+			Long tally = dbcon.handleLongNulls(""); //default to zero
+			
+			LitterCollection lc = 
+					new LitterCollection (eventID, litterID, litterName, litterIcon, volID, teamID, tally);
+			
+			litterCollectionList.add(lc);
+		
+		}
+	}
 
 	@Override
 	public List<LitterCollection> updateEvent(Long litterID, Long volID, Long teamID, Long eventID, Long tally){
@@ -71,10 +100,10 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 
 		if (dbcon.recordExists(selectSQL) ){
 			dbcon.updateTable(updateSQL);
-			System.out.println("update");
+			//System.out.println("update");
 		} else  {
 			dbcon.updateTable(insertSQL);
-			System.out.println("insert");
+			//System.out.println("insert");
 		}
 
 		buildLitterCollectionList();
@@ -82,7 +111,6 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 		return litterCollectionList;
 		
 	}
-	
 	
 	@Override
 	public List<LitterCollection> getLitterCollectionList(){
@@ -93,6 +121,7 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 	@Override
 	public List<LitterCollection> getLitterCollectionListByUserAndEvent(String userId,String eventId){
 		buildLitterCollectionListByUserAndEvent(userId,eventId);
+		buildUncollectedLitterList(userId,eventId);
 		return litterCollectionList;
 	}
 	

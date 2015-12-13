@@ -76,11 +76,9 @@ public class LitterCollectionResource {
 				Long.parseLong(jsonObject.getString("eventID")), 
 				Long.parseLong(jsonObject.getString("tally")) );
 		
-    	System.out.println("end");
     	
         return litterCollectionList.getLitterCollectionList();
 	}
-    
     
     //TODO: Delete this method after testing
     @GET
