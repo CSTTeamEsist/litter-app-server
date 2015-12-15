@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LitterCollection {
+	//LitterCollection class stores list of litter items
+	//and a tally of times it was collected.
 	
 	private long eventID;
 	private String litterName;

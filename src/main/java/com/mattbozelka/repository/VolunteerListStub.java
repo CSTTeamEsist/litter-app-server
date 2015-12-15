@@ -13,6 +13,7 @@ public class VolunteerListStub implements VolunteerListRepository {
 		volunteerList = new ArrayList<Volunteer>();
 	}
 	
+	//build a full list of Volunteers from the database
 	private void buildVolunteerList(){
 		
 		DatabaseConnection dbcon = new DatabaseConnection();
@@ -34,6 +35,7 @@ public class VolunteerListStub implements VolunteerListRepository {
 		//dbcon.closeConnection();
 	}
 	
+	//returns a volunteer object that matches the passed parameters
 	@Override
 	public Volunteer getVolunteer(String fName, String lName, String email){
 		Volunteer v = new Volunteer();
@@ -58,6 +60,7 @@ public class VolunteerListStub implements VolunteerListRepository {
 		//dbcon.closeConnection();
 	}
 	
+	//adds a new volunteer with the passed parameter values
 	@Override
 	public Volunteer addVolunteer(String fName, String lName, String email, String password){
 		

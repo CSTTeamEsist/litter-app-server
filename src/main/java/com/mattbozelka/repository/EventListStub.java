@@ -12,7 +12,8 @@ public class EventListStub implements EventListRepository {
 	public EventListStub() {
 		eventList = new ArrayList<Event>();
 	}
-
+	
+	//builds a list of all events in the database
 	private void buildEventList(){
 		
 		DatabaseConnection dbcon = new DatabaseConnection();

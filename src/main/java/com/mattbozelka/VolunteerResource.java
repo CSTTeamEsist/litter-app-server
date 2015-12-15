@@ -29,7 +29,7 @@ import com.mattbozelka.repository.VolunteerListStub;
  */
 @Path("volunteer-list")
 public class VolunteerResource {
-	
+	//REQ1, REQ13
 	VolunteerListRepository volunteerList = new VolunteerListStub();
 	
     @GET
@@ -38,7 +38,8 @@ public class VolunteerResource {
     public List<Volunteer> getIt() {
         return volunteerList.getVolunteerList();
     }
-
+    
+    //test method used to test json sending and receiving
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,8 +68,8 @@ public class VolunteerResource {
  
 				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
  
-				while (in.readLine() != null) {
-				}
+				while (in.readLine() != null) {}
+				
 				System.out.println("\nREST Service Invoked Successfully..");
 				in.close();
 				
@@ -89,6 +90,7 @@ public class VolunteerResource {
         //return volunteerList.getVolunteerList();
     }
    
+    //takes in a json object and stores it in the database
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -109,7 +111,6 @@ public class VolunteerResource {
 		JsonReader jsonReader = Json.createReader(new StringReader(jsonBuilder.toString()));
 		JsonObject jsonObject = jsonReader.readObject();
 		jsonReader.close();
-
     	return volunteerList.addVolunteer(jsonObject.getString("FName"), 
     			jsonObject.getString("LName"), jsonObject.getString("emailAddress"), 
     			jsonObject.getString("password"));

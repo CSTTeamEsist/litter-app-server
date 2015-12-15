@@ -14,7 +14,7 @@ public class LitterListStub implements LitterListRepository {
 		litterList = new ArrayList<LitterPiece>();
 	}
 	
-
+	//build a list of litter items from the database
 	private void buildLitterList(){
 		
 		DatabaseConnection dbcon = new DatabaseConnection();
@@ -25,7 +25,6 @@ public class LitterListStub implements LitterListRepository {
 			String litterName = dbcon.handleStrNulls(row[1]);
 			String litterIcon = dbcon.handleStrNulls(row[2]);
 			
-			//TODO: LitterPiece.count is set to zero until determining its purpose
 			LitterPiece lp = new LitterPiece (litterID, litterName, litterIcon, 0);
 			
 			litterList.add(lp);

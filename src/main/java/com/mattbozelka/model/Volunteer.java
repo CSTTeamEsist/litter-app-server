@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Volunteer {
+	//REQ1
+	//Volunteer class stores a volunteer and related data
 	
 	private long volID;
 	private String fName;

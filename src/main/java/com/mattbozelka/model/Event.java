@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Event {
+	//Event class stores event data
 	
 	private long eventID;
 	private String location;
