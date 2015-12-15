@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LitterPiece {
+	//LitterPiece class stores one litter item
 	
 	private long litterID;
 	private String name;

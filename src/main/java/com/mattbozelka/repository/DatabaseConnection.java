@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mattbozelka.model.*;
-
+//REQ13
 public class DatabaseConnection {
 	public static boolean driverLoaded = false;
 	public static boolean databaseConnected = false;

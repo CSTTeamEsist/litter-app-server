@@ -29,6 +29,7 @@ import com.mattbozelka.repository.LitterCollectionListStub;
  */
 @Path("litter-collection-list")
 public class LitterCollectionResource {
+	//REQ7
 	
 	LitterCollectionRepository litterCollectionList = new LitterCollectionListStub();
 	
@@ -38,7 +39,7 @@ public class LitterCollectionResource {
         return litterCollectionList.getLitterCollectionList();
     }
     
-
+    //returns a json object based on uderid and eventid
     @GET
     @Path("/{userid}/{eventid}/")
     @Produces(MediaType.APPLICATION_JSON)
@@ -47,7 +48,7 @@ public class LitterCollectionResource {
         return litterCollectionList.getLitterCollectionListByUserAndEvent(userId, eventId);
     }
     
-
+    //reads in a json object and stores it into the database
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +81,7 @@ public class LitterCollectionResource {
         return litterCollectionList.getLitterCollectionList();
 	}
     
-    //TODO: Delete this method after testing
+    //test method used for testing json sending and receiving
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)

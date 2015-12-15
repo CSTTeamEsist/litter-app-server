@@ -30,6 +30,8 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 		buildList(sql);
 	}
 	
+	//builds a list of LitterCollections fromt he database from 
+	//passed sql query.
 	private void buildList(String sql){
 		DatabaseConnection dbcon = new DatabaseConnection();
 		ArrayList<String[]> queryResults = dbcon.getQueryResults(sql);
@@ -50,7 +52,10 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 		
 		}
 	}
+
 	
+	//builds a list of LitterCollections that have not bee collected
+	//from the database for a specific user and event.
 	private void buildUncollectedLitterList(String userId,String eventId){
 		
 		String sql=
@@ -98,6 +103,7 @@ public class LitterCollectionListStub implements LitterCollectionRepository {
 			"VALUES ('" + litterID + "', '" + volID + "', '" + teamID + 
 			"', '" + eventID + "', '" + tally + "');";
 
+		//if record exists, update it, otherwise insert a new record.
 		if (dbcon.recordExists(selectSQL) ){
 			dbcon.updateTable(updateSQL);
 			//System.out.println("update");

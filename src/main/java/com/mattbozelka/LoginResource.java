@@ -15,7 +15,8 @@ import com.mattbozelka.repository.LoginStub;
 /**
  * Root resource (exposed at "login/test@email.com/myPass123" path)
  */
-//@Path("login/test@email.com/myPass123")
+
+//REQ1, REQ13
 
 @Path("login")
 public class LoginResource {
