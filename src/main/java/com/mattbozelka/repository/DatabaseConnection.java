@@ -13,13 +13,13 @@ import java.util.List;
 import com.mattbozelka.model.*;
 //REQ13
 public class DatabaseConnection {
-	public static boolean driverLoaded = false;
-	public static boolean databaseConnected = false;
+	
 	public static Connection conn;
 	
 	public DatabaseConnection(){
-		if (!driverIsLoaded()){loadDriver();}
-		if (!databaseIsConnected()){connectToDatabase();}
+		loadDriver();
+		connectToDatabase();
+		
 	}
 	
 	 public static void loadDriver() {
@@ -28,10 +28,8 @@ public class DatabaseConnection {
             // broken Java implementations
         	// Load driver if not yet loaded
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            driverLoaded=true;
         } catch (Exception ex) {
         	//return false if driver cannot be loaded
-        	driverLoaded=false;
         }
     }
 	
@@ -41,10 +39,8 @@ public class DatabaseConnection {
 				//Set database connection
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cleanupstars","root","password1");
 				//return true if connection successful
-				databaseConnected=true;
 	        } catch (Exception ex) {
 	        	//return false if cannot connect to database
-	        	databaseConnected=false;
 	        }
 	}
 	
@@ -232,12 +228,6 @@ public class DatabaseConnection {
 		}
 	}
 	
-	 private boolean driverIsLoaded(){
-		 return driverLoaded;
-	 }
-	 private boolean databaseIsConnected(){
-		 return databaseConnected;
-	 }
 	 public void closeConnection(){
 		 try {
 			conn.close();
